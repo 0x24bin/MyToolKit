@@ -163,7 +163,7 @@ def save_url_to_file(url_list,name):
 
 def bing_search(query, search_type):
     #search_type: Web, Image, News, Video
-    key= 'put your bing api key here'
+    key= 'put your key here'
     query = urllib.quote(query)
     #print "bing_search s query is %s" % query
     # create credential for authentication
