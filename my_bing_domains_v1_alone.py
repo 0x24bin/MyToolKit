@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 #need python2(my system is py2.7 by default)
+#
+#
+##/root/myenv2/bin/python3.5m is the normal python3
+#/root/myenv/bin/python3.5 is the changed GoogleScraper script version python
+#
 import urllib
 import urllib2
 import json
@@ -18,7 +23,10 @@ def main():
         true_target_list=[]
         true_target_list=get_pure_list(target_list)
         for each in true_target_list:
-            get_the_one_target_domains(each)
+            try:
+                get_the_one_target_domains(each)
+            except:
+                print "getip or socket.gethostbyname_ex wrong,the site may break down,you can check it."
     except:
         sharedHost=sys.argv[1]
         get_the_one_target_domains(sharedHost)
@@ -99,11 +107,14 @@ def get_the_one_target_domains(sharedHost):
 
 
 #this is a function to get a ip from a domain
+
 def getIp(domain):
-    
-    #the below function getaddrinfo may not be good as function gethostbyname
-    #myaddr = socket.getaddrinfo(domain,'http')[0][4][0]
-    return socket.gethostbyname(domain)
+    import socket   
+    try:
+        myaddr=socket.getaddrinfo(domain,'http')[0][4][0]
+        return myaddr
+    except:
+        print "getip wrong5555555555555555"
 
 
 #this is a function to remove \r\n or \n from one sting
@@ -163,7 +174,7 @@ def save_url_to_file(url_list,name):
 
 def bing_search(query, search_type):
     #search_type: Web, Image, News, Video
-    key= 'put your key here'
+    key= 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
     query = urllib.quote(query)
     #print "bing_search s query is %s" % query
     # create credential for authentication
